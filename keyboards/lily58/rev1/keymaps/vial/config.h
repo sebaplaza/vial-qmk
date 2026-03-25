@@ -46,4 +46,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define TAPPING_FORCE_HOLD
 #define TAPPING_TERM 100
 
-
+/* OLED — refresco a 30fps (33ms por frame)
+ * El default QMK para teclados split es 50ms (20fps).
+ * 33ms es el máximo práctico en el ATmega32u4 a 400kHz I2C
+ * sin degradar el escaneo de teclas ni la comunicación split. */
+#define OLED_UPDATE_INTERVAL 33
