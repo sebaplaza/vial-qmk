@@ -29,25 +29,33 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* Space reduction */
 
-#define DYNAMIC_KEYMAP_LAYER_COUNT 6
+#define DYNAMIC_KEYMAP_LAYER_COUNT 5
 #define VIAL_TAP_DANCE_ENTRIES 4
 #undef LOCKING_SUPPORT_ENABLE
 #undef LOCKING_RESYNC_ENABLE
 #define NO_ACTION_ONESHOT
 
-/* Select hand configuration */
-
+/* Select hand configuration
+ * MASTER_LEFT: USB is always plugged into the left half.
+ * Master detection uses hardware VBUS (~5µs), no EEPROM dependency,
+ * no USB enumeration timeout — eliminates the "dead keyboard on boot" bug. */
 #define MASTER_LEFT
-// #define MASTER_RIGHT
-// #define EE_HANDS
-
 #define USE_SERIAL_PD2
 
-#define TAPPING_FORCE_HOLD
-#define TAPPING_TERM 100
+/* Tapping — home row mods
+ * TAPPING_TERM: time window (ms) to distinguish tap from hold.
+ * PERMISSIVE_HOLD: activates hold when another key is pressed before timeout.
+ * CHORDAL_HOLD: only treat a mod-tap as held when the next key is on the
+ *   opposite hand (or in the thumb cluster, marked '*' in chordal_hold_layout).
+ *   This prevents accidental modifier activation during same-hand rolls.
+ * IGNORE_MOD_TAP_INTERRUPT: prevents accidental hold during fast typing. */
+#define TAPPING_TERM 300
+#define PERMISSIVE_HOLD
+#define CHORDAL_HOLD
+// IGNORE_MOD_TAP_INTERRUPT is now the default behavior in QMK — no longer needed
 
-/* OLED — refresco a 30fps (33ms por frame)
- * El default QMK para teclados split es 50ms (20fps).
- * 33ms es el máximo práctico en el ATmega32u4 a 400kHz I2C
- * sin degradar el escaneo de teclas ni la comunicación split. */
+/* OLED — 30fps refresh (33ms per frame)
+ * QMK default for split keyboards is 50ms (20fps).
+ * 33ms is the practical maximum on ATmega32u4 at 400kHz I2C
+ * without degrading key scan or split communication. */
 #define OLED_UPDATE_INTERVAL 33

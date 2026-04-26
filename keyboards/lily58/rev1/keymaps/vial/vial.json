@@ -3,6 +3,9 @@
     "vendorId": "0x04D8",
     "productId": "0xEB2D",
     "lighting": "none",
+    "qmk_settings": false,
+    "combo": { "count": 4 },
+
     "matrix": { "rows": 10, "cols": 6 },
     "layouts": {
       "labels": [],
